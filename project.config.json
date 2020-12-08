@@ -2,7 +2,7 @@
   "miniprogramRoot": "miniprogram/",
   "cloudfunctionRoot": "cloudfunctions/",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -38,7 +38,7 @@
   },
   "appid": "wx9419b31ceab825c0",
   "projectname": "xcx-music",
-  "libVersion": "2.8.1",
+  "libVersion": "2.12.2",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
