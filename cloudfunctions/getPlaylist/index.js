@@ -25,7 +25,6 @@ exports.main = async (event, context) => {
     console.log(data.msg)
     return 0;
   }
-
   // 参数赋值
   const playlist = data.result
 
@@ -40,5 +39,4 @@ exports.main = async (event, context) => {
       console.log('插入失败')
     })
   }
-
 }
