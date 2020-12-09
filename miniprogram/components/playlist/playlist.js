@@ -12,7 +12,7 @@ Component({
   // 组件内使用observers数据监听器
   observers: {
     ['playlist.playCount'](count) {
-      console.log(count)
+      // console.log(count)
       // 不能对监听的值进行赋值会造成死循环，可以把值赋给this.setDate里面
       this.setData({
         _count: this._tranNumber(count, 2)

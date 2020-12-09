@@ -11,8 +11,6 @@ const axios = require('axios')
 
 const URL = 'https://apis.imooc.com/personalized?icode=59761331F59DE69D'
 
-// 数据库初始化
-// const db = wx.cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   // 获取接口信息
@@ -28,15 +26,37 @@ exports.main = async (event, context) => {
   // 参数赋值
   const playlist = data.result
 
+  const list = await db.collection('playlist').get();
+
+
+  const newData = []
+  for (let i = 0, len1 = playlist.length; i < len1; i++) {
+    let flag = true
+    for (let j = 0, len2 = list.data.length; j < len2; j++) {
+      if (playlist[i].id === list.data[j].id) {
+        flag = false
+        break
+      }
+    }
+    if (flag) {
+      newData.push(playlist[i])
+    }
+    console.log(newData)
+  }
+
   // 把数据存储到云数据库
-  if (playlist.length > 0) {
+  for (let i = 0, len = newData.length; i < len; i++) {
     await db.collection('playlist').add({
-      data: [...playlist]
+      data: {
+        ...newData[i],
+        createTime: db.serverDate(),
+      }
     }).then((res) => {
       console.log('插入成功')
     }).catch((err) => {
-      console.log(err)
-      console.log('插入失败')
+      console.error('插入失败')
     })
   }
+
+  return newData.length
 }

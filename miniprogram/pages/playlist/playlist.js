@@ -1,4 +1,6 @@
 // pages/playlist/playlist.js
+const db = wx.cloud.database();
+const MAX_LIMIT = 20
 Page({
 
   /**
@@ -134,8 +136,34 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: async function () {
+    // 获取云数据库内的轮播图信息
+    let {
+      data
+    } = await db.collection('swiperImgUrls').get();
+    this.setData({
+      swiperImgUrls: data.data
+    })
 
+
+    // 获取云数据库内的推荐歌单数据 (取出全部的数据)
+    // 先取出集合记录总数
+    const countResult = await db.collection('playlist').count()
+    const total = countResult.total
+    // 计算需分几次取
+    const batchTimes = Math.ceil(total / 20)
+    // 承载所有读操作的 promise 的数组
+    let tasks = []
+
+    for (let i = 0; i < batchTimes; i++) {
+      const promise = await db.collection('playlist').skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+      for (let i = 0; i < promise.data.length; i++) {
+        tasks.push(promise.data[i])
+      }
+    }
+    this.setData({
+      playlist: tasks
+    })
   },
 
   /**
