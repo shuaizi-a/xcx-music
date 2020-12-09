@@ -6,5 +6,6 @@
   "backgroundTextStyle": "light",
   "usingComponents": {
     "x-playlist": "/components/playlist/playlist"
-  }
+  },
+  "enablePullDownRefresh": true
 }

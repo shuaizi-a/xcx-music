@@ -1,14 +1,9 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-
 cloud.init();
-
 // 初始化云数据库
 const db = cloud.database();
-
-// const rp = require('request-promise')
 const axios = require('axios')
-
 const URL = 'https://apis.imooc.com/personalized?icode=59761331F59DE69D'
 
 // 云函数入口函数
@@ -25,9 +20,29 @@ exports.main = async (event, context) => {
   }
   // 参数赋值
   const playlist = data.result
-
-  const list = await db.collection('playlist').get();
-
+  // 获取云存储信息
+  // const list = await db.collection('playlist').get();
+  // 先取出集合记录总数
+  const countResult = await db.collection('playlist').count()
+  const total = countResult.total
+  // 计算需分几次取
+  const batchTimes = Math.ceil(total / 20)
+  // 承载所有读操作的 promise 的数组
+  let tasks = []
+  for (let i = 0; i < batchTimes; i++) {
+    const promise = await db.collection('playlist').skip(i * 20).limit(20).get()
+    tasks.push(promise)
+  }
+  let list = {
+    data: []
+  }
+  if (tasks.length > 0) {
+    list = (await Promise.all(tasks)).reduce((acc, cur) => {
+      return {
+        data: acc.data.concat(cur.data),
+      }
+    })
+  }
 
   const newData = []
   for (let i = 0, len1 = playlist.length; i < len1; i++) {
@@ -57,6 +72,5 @@ exports.main = async (event, context) => {
       console.error('插入失败')
     })
   }
-
   return newData.length
 }

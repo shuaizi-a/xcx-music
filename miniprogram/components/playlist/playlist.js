@@ -21,6 +21,13 @@ Component({
   },
   data: {}, // 私有数据，可用于模板渲染
   methods: {
+    goToMusiclist() {
+      wx.navigateTo({
+        // 路由跳转并传参
+        url: `../../pages/musiclist/musiclist?playlistId=${this.properties.playlist.id}`,
+      })
+    },
+
     // 数字格式化
     _tranNumber(num, point) {
       let numStr = num.toString().split('.')[0]
