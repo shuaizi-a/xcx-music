@@ -13,3 +13,7 @@
 		<x-playlist playlist="{{item}}"></x-playlist>
 	</block>
 </view>
+
+<block wx:if="{{!StateLoading}}">
+	<text class="bottom_text" >没有更多啦</text>
+</block>

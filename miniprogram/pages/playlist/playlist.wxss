@@ -19,3 +19,10 @@
   display: flex;
   justify-content: center;
 }
+
+.bottom_text {
+  text-align: center;
+  padding: 16rpx 0;
+  color: #868686;
+  font-size: 28rpx;
+}

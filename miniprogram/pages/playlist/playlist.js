@@ -117,7 +117,8 @@ Page({
       //   "id": 2.79477263e+09,
       //   "type": 0.0
       // }
-    ]
+    ],
+    StateLoading: true
   },
 
   /**
@@ -153,6 +154,13 @@ Page({
         playlist: this.data.playlist.concat(res.result.data)
       })
 
+      if (res.result.data.length === 0) {
+        this.setData({
+          StateLoading: false
+        })
+        console.log('到底了')
+      }
+
       // 关闭下拉刷新和提示信息
       wx.hideLoading()
       wx.stopPullDownRefresh();
@@ -187,7 +195,8 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      playlist: []
+      playlist: [],
+      StateLoading: true
     })
     this._getPlaylist();
   },
@@ -196,7 +205,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this._getPlaylist();
+    if (this.data.StateLoading) {
+      this._getPlaylist();
+    }
   },
 
   /**
