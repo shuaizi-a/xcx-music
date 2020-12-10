@@ -36,14 +36,9 @@ Page({
       // 把热门歌单内的信息存储到本地
       this._setMusiclist()
       wx.hideLoading()
-
-   
     })
   },
-
   _setMusiclist() {
     wx.setStorageSync('musiclist', this.data.musiclist)
   },
-
-
 })

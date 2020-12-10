@@ -17,7 +17,9 @@ exports.main = async (event, context) => {
 
   // 获取热门歌单信息
   app.router('playlist', async (ctx, next) => {
-    ctx.body = await cloud.database({env: 'shuaizi9807113513'}).collection('playlist')
+    ctx.body = await cloud.database({
+        env: 'shuaizi9807113513'
+      }).collection('playlist')
       .skip(event.start)
       .limit(event.count)
       .orderBy('playCount', 'desc')
@@ -30,6 +32,12 @@ exports.main = async (event, context) => {
   // 根据歌单ID获取歌曲
   app.router('musiclist', async (ctx, next) => {
     const res = await axios.get(`${BASE_URL}/playlist/detail?id=${event.playlistId}&${ICON}`)
+    ctx.body = res.data;
+  })
+
+  // 返回播放链接
+  app.router('musicUrl', async (ctx, next) => {
+    const res = await axios.get(`${BASE_URL}/song/url?id=${event.musicId}&${ICON}`)
     ctx.body = res.data;
   })
 
