@@ -5,7 +5,7 @@
   "backgroundColor": "#eeeeee",
   "backgroundTextStyle": "light",
   "usingComponents": {
-    "x-playlist": "../components/playlist/playlist"
+    "x-playlist": "/components/playlist/playlist"
   },
   "enablePullDownRefresh": true
 }
