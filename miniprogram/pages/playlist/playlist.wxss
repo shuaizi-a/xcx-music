@@ -21,6 +21,7 @@
 }
 
 .bottom_text {
+  display: block;
   text-align: center;
   padding: 16rpx 0;
   color: #868686;
