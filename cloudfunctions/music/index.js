@@ -17,10 +17,10 @@ exports.main = async (event, context) => {
 
   // 获取热门歌单信息
   app.router('playlist', async (ctx, next) => {
-    ctx.body = await cloud.database().collection('playlist')
+    ctx.body = await cloud.database({env: 'shuaizi9807113513'}).collection('playlist')
       .skip(event.start)
       .limit(event.count)
-      .orderBy('createTime', 'desc')
+      .orderBy('playCount', 'desc')
       .get()
       .then((res) => {
         return res;

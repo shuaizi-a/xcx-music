@@ -2,9 +2,11 @@
   "permissions": {
     "openapi": []
   },
-  "triggers": [{
-    "name": "myTrigger",
-    "type": "timer",
-    "config": "0 0 10,14,16,23 * * * *"
-  }]
+  "triggers": [
+    {
+      "name": "myTrigger",
+      "type": "timer",
+      "config": "59 59 23 * * * *"
+    }
+  ]
 }

@@ -14,12 +14,13 @@ Component({
   data: {
     playingId: -1 // 点击歌曲高亮显示值
   },
+  // 组件所在页面的生命周期
   pageLifetimes: {
+    // 组件所在的页面被展示时执行
     show() {
       this.setData({
         playingId: parseInt(app.getPlayMusicId())
       })
-
     }
   },
 

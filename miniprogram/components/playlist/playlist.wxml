@@ -1,3 +1,5 @@
+
+<!-- 歌单展示组件 -->
 <view class="playlist-container" bind:tap="goToMusiclist">
   <image src="{{playlist.picUrl}}" class="playlist-img"></image>
   <text class="playlist-playcount">{{_count}}</text>
