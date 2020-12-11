@@ -65,15 +65,15 @@ Component({
       // 监听音频播放进度更新事件
       backgroundAudioManager.onTimeUpdate(() => {
         const currentTime = backgroundAudioManager.currentTime // 获取播放时长
-        const duration = backgroundAudioManager.duration // 获取播放长度
+        const duration = backgroundAudioManager.duration // 当前音频的长度
 
         const sec = currentTime.toString().split('.')[0];
         // 判断截取后的时间不等于设置的数字
         if (sec != currentSec) {
           const currentTimeFmt = this._dateFormat(currentTime) // 播放时长格式化
           this.setData({
-            movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration, // 圆圈所在的位置 （长条 - 圆宽) * 时长 / 播放时长
-            progress: currentTime / duration * 100, // 圆圈后面的颜色
+            movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration, // 圆圈所在的位置 （长条 - 圆宽) * 播放时长 / 总时长
+            progress: currentTime / duration * 100, // 圆圈后面的颜色 总时长 / 已播放 * 100
             ['showTime.currentTime']: `${currentTimeFmt.min}:${currentTimeFmt.sec}`,
           })
           currentSec = sec

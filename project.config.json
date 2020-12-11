@@ -19,6 +19,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -28,9 +30,6 @@
     "useIsolateContext": true,
     "useCompilerModule": false,
     "userConfirmedUseCompilerModuleSwitch": true,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
-    "enableEngineNative": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
@@ -56,12 +55,22 @@
     "game": {
       "list": []
     },
+    "gamePlugin": {
+      "list": []
+    },
     "miniprogram": {
       "list": [
         {
           "id": -1,
           "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide"
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pages/blog/blog",
+          "pathName": "pages/blog/blog",
+          "scene": null
         }
       ]
     }
