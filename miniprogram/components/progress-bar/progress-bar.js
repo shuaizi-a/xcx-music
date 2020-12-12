@@ -3,6 +3,8 @@ let movableViewWidth = 0;
 // 获取播放事件
 const backgroundAudioManager = wx.getBackgroundAudioManager();
 let currentSec = -1 // 当前的秒数
+let duration = 0 // 歌曲总时长
+let isMoving = false // 表示当前进度条是否在拖拽，解决：当进度条拖动时候和updatetime事件有冲突的问题
 Component({
   behaviors: [],
   // 属性定义（详情参见下文）
@@ -29,12 +31,34 @@ Component({
     }
   },
   methods: {
+    onChange(event) {
+      if (event.detail.source == 'touch') {
+        // 当前正在拖动
+        isMoving = true;
+        this.data.progress = event.detail.x / (movableAreaWidth - movableViewWidth) * 100
+        // 圆光标的位置
+        this.data.movableDis = event.detail.x
+      }
+    },
+    onTouchEnd(event) {
+      // const currentTimeFmt = this._dateFormat(Math.floor(backgroundAudioManager.currentTime)) // 
+      // console.log(currentTimeFmt)
+      this.setData({
+        progress: this.data.progress,
+        movableDis: this.data.movableDis,
+        // ['showTime.currentTime']: currentTimeFmt.min + ':' + currentTimeFmt.sec
+      })
+      // 跳转播放的位置
+      backgroundAudioManager.seek(duration * this.data.progress / 100);
+      // 拖动结束
+      isMoving = false;
+    },
+    // 获取滚动条的长度和圆的长度
     _getMovableDis() {
       const query = this.createSelectorQuery()
       query.select('.movable-area').boundingClientRect()
       query.select('.movable-view').boundingClientRect()
       query.exec((rect) => {
-        // console.log(rect)
         movableAreaWidth = rect[0].width
         movableViewWidth = rect[1].width
         console.log(movableAreaWidth, movableViewWidth)
@@ -64,18 +88,28 @@ Component({
       })
       // 监听音频播放进度更新事件
       backgroundAudioManager.onTimeUpdate(() => {
-        const currentTime = backgroundAudioManager.currentTime // 获取播放时长
-        const duration = backgroundAudioManager.duration // 当前音频的长度
+        console.log(888)
+        // 获取播放时长
+        const currentTime = backgroundAudioManager.currentTime
+        // 当前音频的长度
+        const duration = backgroundAudioManager.duration
 
         const sec = currentTime.toString().split('.')[0];
         // 判断截取后的时间不等于设置的数字
         if (sec != currentSec) {
-          const currentTimeFmt = this._dateFormat(currentTime) // 播放时长格式化
+          // 播放时长格式化
+          const currentTimeFmt = this._dateFormat(currentTime)
           this.setData({
-            movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration, // 圆圈所在的位置 （长条 - 圆宽) * 播放时长 / 总时长
-            progress: currentTime / duration * 100, // 圆圈后面的颜色 总时长 / 已播放 * 100
+            // 圆圈后面的颜色 总时长 / 已播放 * 100
+            progress: currentTime / duration * 100,
             ['showTime.currentTime']: `${currentTimeFmt.min}:${currentTimeFmt.sec}`,
           })
+          if (!isMoving) {
+            this.setData({
+              // 圆圈所在的位置 （长条 - 圆宽) * 播放时长 / 总时长
+              movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration
+            })
+          }
           currentSec = sec
         }
       })
@@ -85,8 +119,7 @@ Component({
       backgroundAudioManager.onError((res) => {})
     },
     _setTime() {
-      let duration = backgroundAudioManager.duration;
-      console.log(duration)
+      duration = backgroundAudioManager.duration; // 歌曲总时长
       const durationFmt = this._dateFormat(duration)
       this.setData({
         ['showTime.totalTime']: `${durationFmt.min}:${durationFmt.sec}`
