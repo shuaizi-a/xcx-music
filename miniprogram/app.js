@@ -13,7 +13,6 @@ App({
         traceUser: true,
       })
     }
-
     // 类似于vueX全局都可以访问到的变量
     this.globalData = {
       playingMusicId: -1, // 当前歌词高亮ID
@@ -27,5 +26,5 @@ App({
   // 设置选中的歌
   setPlayMusicId(musicId) {
     this.globalData.playingMusicId = musicId
-  },
+  }
 })

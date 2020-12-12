@@ -8,7 +8,9 @@ let isMoving = false // 表示当前进度条是否在拖拽，解决：当进�
 Component({
   behaviors: [],
   // 属性定义（详情参见下文）
-  properties: {},
+  properties: {
+    isSame: Boolean
+  },
   // observers数据监听器可以用于监听和响应任何属性和数据字段的变化
   // 组件内使用observers数据监听器
   observers: {},
@@ -26,6 +28,12 @@ Component({
   lifetimes: {
     // 在组件在视图层布局完成后执行	
     ready() {
+
+      // 判断是否是同一首歌曲
+      if (this.properties.isSame && this.data.showTime.totalTime == '00:00') {
+        this._setTime()
+        console.log(666)
+      }
       this._bindBGMEvent();
       this._getMovableDis();
     }
@@ -67,11 +75,16 @@ Component({
     _bindBGMEvent() {
       // https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/InnerAudioContext.html
       // 监听音频播放事件
-      backgroundAudioManager.onPlay(() => {})
+      backgroundAudioManager.onPlay(() => {
+        isMoving = false;
+        this.triggerEvent('musicPlay')
+      })
       // 监听音频停止事件
       backgroundAudioManager.onStop(() => {})
       // 监听音频暂停事件
-      backgroundAudioManager.onPause(() => {})
+      backgroundAudioManager.onPause(() => {
+        this.triggerEvent('musicPause')
+      })
       // 监听音频加载中事件。当音频因为数据不足，需要停下来加载时会触发
       backgroundAudioManager.onWaiting(() => {})
       // 监听音频进入可以播放状态的事件。但不保证后面可以流畅播放
@@ -111,10 +124,19 @@ Component({
             })
           }
           currentSec = sec
+
+          // 歌词联动
+          this.triggerEvent('timeUpdate', {
+            // 播放的时间长度
+            currentTime
+          })
         }
       })
       // 监听音频自然播放至结束的事件
-      backgroundAudioManager.onEnded(() => {})
+      backgroundAudioManager.onEnded(() => {
+        // 向父组件传递事件
+        this.triggerEvent('musicEnd')
+      })
       // 监听音频播放错误事件
       backgroundAudioManager.onError((res) => {})
     },

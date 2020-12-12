@@ -78,11 +78,13 @@
   color: #fefefe;
 }
 
-.icon-shangyishoushangyige, .icon-xiayigexiayishou {
+.icon-shangyishoushangyige,
+.icon-xiayigexiayishou {
   font-size: 80rpx;
 }
 
-.icon-bofang1, .icon-zanting1 {
+.icon-bofang1,
+.icon-zanting1 {
   font-size: 120rpx;
   margin: 0 50rpx;
 }
@@ -114,4 +116,13 @@
   left: 50%;
   transform: translateX(-50%);
   bottom: 24%;
+}
+
+
+.lyric {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 30%;
 }

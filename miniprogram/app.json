@@ -5,7 +5,8 @@
     "pages/profile/profile",
     "pages/musiclist/musiclist",
     "pages/player/player",
-    "components/progress-bar/progress-bar"
+    "components/progress-bar/progress-bar",
+    "components/lyric/lyric"
   ],
   "requiredBackgroundModes": [
     "audio"
