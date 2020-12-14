@@ -77,9 +77,9 @@ Component({
         if (currentTime <= lrcList[i].time) {
           this.setData({
             // 当前选中的歌词的索引
-            nowLyricIndex: i,
+            nowLyricIndex: i - 1,
             // 滚动条滚动的高度
-            scrollTop: i * lyricHeight
+            scrollTop: (i - 1) * lyricHeight
           })
           break
         }

@@ -3,5 +3,9 @@
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "发现",
   "backgroundColor": "#eeeeee",
-  "backgroundTextStyle": "light"
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "x-search": "/components/search/search",
+    "x-login": "/components/login/login"
+  }
 }
