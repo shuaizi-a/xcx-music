@@ -45,6 +45,7 @@ Component({
           // console.log(res)
           // 求出1rpx的大小
           // 获取一次滚动的高度
+          // 比例换算: 屏幕宽度 / 设计稿宽度(750) * 设计稿高度(64) = 其他屏幕的设计稿高度 
           lyricHeight = res.screenWidth / 750 * 64
         },
       })
@@ -57,12 +58,12 @@ Component({
   methods: {
     // 获取父组件传递过来的值
     update(currentTime) {
-      // console.log(currentTime)
       let lrcList = this.data.lrcList
       if (lrcList.length == 0) {
         return
       }
 
+      // 处理歌词滚动完毕歌曲还没有结束
       if (currentTime > lrcList[lrcList.length - 1].time) {
         if (this.data.nowLyricIndex != -1) {
           this.setData({
@@ -71,13 +72,14 @@ Component({
           })
         }
       }
+
       for (let i = 0, len = lrcList.length; i < len; i++) {
         if (currentTime <= lrcList[i].time) {
           this.setData({
             // 当前选中的歌词的索引
-            nowLyricIndex: i - 1,
+            nowLyricIndex: i,
             // 滚动条滚动的高度
-            scrollTop: (i - 1) * lyricHeight
+            scrollTop: i * lyricHeight
           })
           break
         }

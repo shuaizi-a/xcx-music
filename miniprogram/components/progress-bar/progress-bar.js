@@ -101,7 +101,6 @@ Component({
       })
       // 监听音频播放进度更新事件
       backgroundAudioManager.onTimeUpdate(() => {
-        console.log(888)
         // 获取播放时长
         const currentTime = backgroundAudioManager.currentTime
         // 当前音频的长度
