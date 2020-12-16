@@ -5,11 +5,9 @@
     "pages/profile/profile",
     "pages/musiclist/musiclist",
     "pages/player/player",
-    "components/progress-bar/progress-bar",
     "components/lyric/lyric",
-    "components/bottom-modal/bottom-modal",
-    "components/login/login",
-    "pages/blog-edit/blog-edit"
+    "pages/blog-edit/blog-edit",
+    "pages/blog-comment/blog-comment"
   ],
   "requiredBackgroundModes": [
     "audio"
@@ -24,8 +22,7 @@
   "tabBar": {
     "color": "#474747",
     "selectedColor": "#d43c43",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/playlist/playlist",
         "text": "音乐",
         "iconPath": "images/music.png",

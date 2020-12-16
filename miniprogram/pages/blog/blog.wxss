@@ -1,9 +1,7 @@
-/* pages/blog/blog.wxss */
-.page {
+.page{
   background-color: #f1f1f1;
   overflow: scroll;
 }
-
 .header {
   display: flex;
   align-items: center;
@@ -41,12 +39,4 @@
 .blog-panel {
   margin-bottom: 20rpx;
   box-sizing: border-box;
-}
-
-.login {
-  font-size: 32rpx;
-  height: 80rpx;
-  background-color: #d43c33;
-  color: #fff;
-  margin: 110rpx;
 }
