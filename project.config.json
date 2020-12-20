@@ -53,26 +53,7 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "pages/blog/blog",
-          "pathName": "pages/blog/blog",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/blog/blog",
-          "pathName": "pages/blog/blog",
-          "scene": null
-        }
-      ]
+      "list": []
     }
   }
 }

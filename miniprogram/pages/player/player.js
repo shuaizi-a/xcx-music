@@ -80,6 +80,9 @@ Page({
         backgroundAudioManager.singer = music.ar[0].name
         // 专辑名，原生音频播放器中的分享功能，分享出去的卡片简介，也将使用该值。
         backgroundAudioManager.epname = music.al.name
+
+        // 保存播放历史
+        this.savePlayHistory()
       }
 
       // 设置正在播放
