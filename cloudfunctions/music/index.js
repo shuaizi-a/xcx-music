@@ -18,7 +18,7 @@ exports.main = async (event, context) => {
   // 获取热门歌单信息
   app.router('playlist', async (ctx, next) => {
     ctx.body = await cloud.database({
-        env: 'shuaizi9807113513'
+        // env: 'cloud1-1gine992bf4edd34'
       }).collection('playlist')
       .skip(event.start)
       .limit(event.count)

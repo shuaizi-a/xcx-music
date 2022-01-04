@@ -3,7 +3,7 @@ const cloud = require('wx-server-sdk')
 cloud.init();
 // 初始化云数据库
 const db = cloud.database({
-  env: 'shuaizi9807113513'
+  // env: 'shuaizi9807113513'
 });
 const axios = require('axios')
 const URL = 'https://apis.imooc.com/personalized?icode=59761331F59DE69D'

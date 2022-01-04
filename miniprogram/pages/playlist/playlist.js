@@ -8,35 +8,35 @@ Page({
    */
   data: {
     swiperImgUrls: [{
-        _id: 1,
-        url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
-      },
-      {
-        _id: 2,
-        url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
-      },
-      {
-        _id: 3,
-        url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
-      }
+      _id: 1,
+      url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
+    },
+    {
+      _id: 2,
+      url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
+    },
+    {
+      _id: 3,
+      url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
+    }
     ],
     playlist: [
-      // {
-      //   "_id": "08560c9e5d042a5c0174f1ca26f1d7b2",
-      //   "copywrier": "热门推荐",
-      //   "playCount": 1.4641238e+06,
-      //   "highQuality": false,
-      //   "type": 0.0,
-      //   "canDislike": true,
-      //   "name": "天气转热了，适合听点凉爽的歌。",
-      //   "alg": "cityLevel_unknow",
-      //   "createTime": {
-      //     "$date": "2019-06-14T23:14:36.746Z"
-      //   },
-      //   "id": 2.780381322e+09,
-      //   "picUrl": "https://p2.music.126.net/Biky7TE4CtW6NjGuqoUKZg==/109951164041827987.jpg",
-      //   "trackCount": 53.0
-      // },
+      {
+        "_id": "08560c9e5d042a5c0174f1ca26f1d7b2",
+        "copywrier": "热门推荐",
+        "playCount": 1.4641238e+06,
+        "highQuality": false,
+        "type": 0.0,
+        "canDislike": true,
+        "name": "天气转热了，适合听点凉爽的歌。",
+        "alg": "cityLevel_unknow",
+        "createTime": {
+          "$date": "2019-06-14T23:14:36.746Z"
+        },
+        "id": 2.780381322e+09,
+        "picUrl": "https://p2.music.126.net/Biky7TE4CtW6NjGuqoUKZg==/109951164041827987.jpg",
+        "trackCount": 53.0
+      },
       // {
       //   "_id": "08560c9e5d042a5c0174f1da7aa357aa",
       //   "highQuality": false,
@@ -138,9 +138,9 @@ Page({
   },
   _getPlaylist() {
     // 提示信息
-    wx.showLoading({
-      title: '加载中',
-    })
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
     wx.cloud.callFunction({
       name: 'music',
       data: {
@@ -176,7 +176,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: async function () {},
+  onShow: async function () { },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -188,7 +188,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
